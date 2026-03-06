@@ -1,6 +1,6 @@
 {
-  "name": "Name Manager",
-  "short_name": "Names",
+  "name": "Listy",
+  "short_name": "Listy",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000020",
