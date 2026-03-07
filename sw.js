@@ -1,4 +1,4 @@
-const CACHE_NAME = "name-app-v1.0.4";
+const CACHE_NAME = "Listy-v1.0.4";
 
 const files = [
   "/",
