@@ -17,18 +17,28 @@ gtag('js', new Date());
 
 gtag('config', 'G-RYWFNY5XWP');
 </script>
+
+        <!--Push Notification -->
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "4ebed75a-0163-46c2-bde5-25469fb91e80",
-      safari_web_id: "web.onesignal.auto.212e621b-efc2-4b2a-9d36-9f4cd158ecec",
-      notifyButton: {
-        enable: true,
-      },
-    });
-  });
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+OneSignalDeferred.push(async function(OneSignal) {
+
+await OneSignal.init({
+appId: "4ebed75a-0163-46c2-bde5-25469fb91e80",
+
+serviceWorkerPath: "OneSignalSDKWorker.js",
+serviceWorkerParam: { scope: "/Listy/" },
+
+notifyButton: {
+enable: true,
+},
+
+});
+
+});
 </script>
     </head>
 
