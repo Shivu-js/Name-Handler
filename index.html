@@ -1,47 +1,64 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#000020">
-        <title>Listy</title>
-        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-        <link rel="manifest" href="manifest.json">
-        <!-- Google Analytics -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000020">
+
+<title>Listy</title>
+
+<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+<link rel="manifest" href="manifest.json">
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYWFNY5XWP"></script>
 
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-
 gtag('config', 'G-RYWFNY5XWP');
 </script>
-    </head>
 
-    <body>
-        <div class="bg">
-          <h1>Listy</h1><hr><br>
-          <div class="action_area">
-            <div class="input">
-                <input type="text" id="input" placeholder="Add to Listy" />
-            </div>
+</head>
 
-            <div class="button">
-                <button id="addName">Add</button>
-                <button id="downloadTxt">Download Text</button>
-                <button id="removeName">Clear All</button>
-            </div>
-            </div>
-            <ol id="list"></ol>
-        </div>
+<body>
 
-        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<div class="bg">
+
+<h1>Listy</h1>
+<hr>
+<br>
+
+<div class="action_area">
+
+<div class="input">
+<input type="text" id="input" placeholder="Add to Listy" />
+</div>
+
+<div class="button">
+<button id="addName">Add</button>
+<button id="downloadTxt">Download Text</button>
+<button id="removeName">Clear All</button>
+</div>
+
+</div>
+
+<ol id="list"></ol>
+
+</div>
+
+
+<!-- Eruda Mobile DevTools -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>
 eruda.init();
 </script>
 
-        <script type="module">
+
+<!-- Firebase FCM -->
+<script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-messaging.js";
 
@@ -57,25 +74,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
+navigator.serviceWorker.register("/Listy/firebase-messaging-sw.js")
+.then((registration) => {
+
+console.log("Service Worker Registered");
+
 Notification.requestPermission().then(permission => {
+
+console.log("Permission:", permission);
 
 if(permission === "granted"){
 
 getToken(messaging,{
-vapidKey: "BOi68ehjqWiXGE64at4nwkGJwYlUsUCZjDb3LBpaBwD1oPb84EcciS9secPoHYi71MmpWVS1GYCBip471q8tGFE"
-}).then(token=>{
-
+vapidKey: "BOi68ehjqWiXGE64at4nwkGJwYlUsUCZjDb3LBpaBwD1oPb84EcciS9secPoHYi71MmpWVS1GYCBip471q8tGFE",
+serviceWorkerRegistration: registration
+})
+.then(token=>{
 console.log("User Token:",token);
-
+})
+.catch(err=>{
+console.log("Token error:",err);
 });
 
 }
 
 });
-        </script>
 
-        <script src="script.js">
-          
-        </script>
-    </body>
+});
+
+</script>
+
+
+<script src="script.js"></script>
+
+</body>
 </html>
