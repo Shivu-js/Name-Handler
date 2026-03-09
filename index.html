@@ -35,6 +35,40 @@ gtag('config', 'G-RYWFNY5XWP');
             </div>
             <ol id="list"></ol>
         </div>
+        <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-messaging.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyALtFqrxD2TLrQXNvOyJRtsfvi3bbKiCnY",
+  authDomain: "listy-pwa.firebaseapp.com",
+  projectId: "listy-pwa",
+  storageBucket: "listy-pwa.firebasestorage.app",
+  messagingSenderId: "909038043802",
+  appId: "1:909038043802:web:9277e0fa6dc63ec6735523"
+};
+
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
+
+Notification.requestPermission().then(permission => {
+
+if(permission === "granted"){
+
+getToken(messaging,{
+vapidKey: "YOUR_PUBLIC_VAPID_KEY"
+}).then(token=>{
+
+console.log("User Token:",token);
+
+});
+
+}
+
+});
+
+        </script>
         <script src="script.js">
           
         </script>
