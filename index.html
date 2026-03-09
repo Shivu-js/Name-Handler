@@ -1,56 +1,75 @@
-<!doctype html>
+<<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#000020">
-        <title>Listy</title>
-        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-        <link rel="manifest" href="manifest.json">
-        <!-- Google Analytics -->
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000020">
+
+<title>Listy</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYWFNY5XWP"></script>
 
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-
 gtag('config', 'G-RYWFNY5XWP');
 </script>
-    </head>
 
-    <body>
-        <div class="bg">
-          <h1>Listy</h1><hr><br>
-          <div class="action_area">
-            <div class="input">
-                <input type="text" id="input" placeholder="Add to Listy" />
-            </div>
+</head>
 
-            <div class="button">
-                <button id="addName">Add</button>
-                <button id="downloadTxt">Download Text</button>
-                <button id="removeName">Clear All</button>
-            </div>
-            </div>
-            <ol id="list"></ol>
-        </div>
-        <script type="module">
-            <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
+<body>
+
+<div class="bg">
+
+<h1>Listy</h1>
+<hr><br>
+
+<div class="action_area">
+
+<div class="input">
+<input type="text" id="input" placeholder="Add to Listy">
+</div>
+
+<div class="button">
+<button id="addName">Add</button>
+<button id="downloadTxt">Download Text</button>
+<button id="removeName">Clear All</button>
+</div>
+
+</div>
+
+<ol id="list"></ol>
+
+</div>
+
+
+<!-- Eruda Mobile DevTools -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>
 eruda.init();
 </script>
-<script>
+
+
+<!-- Firebase Push Notifications -->
+<script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-messaging.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyALtFqrxD2TLrQXNvOyJRtsfvi3bbKiCnY",
-  authDomain: "listy-pwa.firebaseapp.com",
-  projectId: "listy-pwa",
-  storageBucket: "listy-pwa.firebasestorage.app",
-  messagingSenderId: "909038043802",
-  appId: "1:909038043802:web:9277e0fa6dc63ec6735523"
+apiKey: "AIzaSyALtFqrxD2TLrQXNvOyJRtsfvi3bbKiCnY",
+authDomain: "listy-pwa.firebaseapp.com",
+projectId: "listy-pwa",
+storageBucket: "listy-pwa.firebasestorage.app",
+messagingSenderId: "909038043802",
+appId: "1:909038043802:web:9277e0fa6dc63ec6735523"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -62,19 +81,24 @@ if(permission === "granted"){
 
 getToken(messaging,{
 vapidKey: "BOi68ehjqWiXGE64at4nwkGJwYlUsUCZjDb3LBpaBwD1oPb84EcciS9secPoHYi71MmpWVS1GYCBip471q8tGFE"
-}).then(token=>{
+})
+.then(token=>{
 
 console.log("User Token:",token);
 
+})
+.catch(err=>{
+console.log("Token Error:",err);
 });
 
 }
 
 });
 
-        </script>
-        <script src="script.js">
-          
-        </script>
-    </body>
+</script>
+
+
+<script src="script.js"></script>
+
+</body>
 </html>
